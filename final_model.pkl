@@ -1,1 +1,45 @@
+# Importing libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+# Load data
+df = pd.read_csv('Heart_Attack_Risk_Levels_Dataset.csv')
+
+# Remove heart rate outliers
+df = df[df['Heart rate'] < 200]  # Remove absurd heart rates >200
+
+# Label encode categorical variables
+from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+df['Result'] = le.fit_transform(df['Result'])
+df['Risk_Level'] = le.fit_transform(df['Risk_Level'])
+df['Recommendation'] = le.fit_transform(df['Recommendation'])
+
+# Final look
+print(df.head())
+
+import pickle
+
+# After you train your best model, suppose named 'model'
+pickle.dump(model, open('saved_models/final_model.pkl', 'wb'))
+
+
+#Exploratory Data Analysis
+# Histograms
+df.hist(figsize=(15,10))
+plt.tight_layout()
+plt.show()
+
+# Boxplot for outliers
+plt.figure(figsize=(12,6))
+sns.boxplot(data=df)
+plt.xticks(rotation=90)
+plt.show()
+
+# Correlation heatmap
+plt.figure(figsize=(10,8))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.show()
