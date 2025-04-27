@@ -43,3 +43,8 @@ plt.show()
 plt.figure(figsize=(10,8))
 sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
 plt.show()
+
+import pickle
+
+# After training your best model
+pickle.dump(model, open('final_model.pkl', 'wb'))
