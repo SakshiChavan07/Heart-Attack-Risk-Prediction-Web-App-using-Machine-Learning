@@ -158,4 +158,4 @@ import pickle
 pickle.dump(model, open('Project.pkl', 'wb'))
 
 # To load it again later:
-# model = pickle.load(open('model.pkl', 'rb'))
+model = pickle.load(open('final_model.pkl', 'rb'))
